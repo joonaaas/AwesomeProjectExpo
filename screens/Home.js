@@ -4,8 +4,9 @@ import SectionPalette from '../components/SectionPalette';
 
 export default function Home({ navigation }) {
   const [palettes, setPalettes] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const getPalettes = useCallback(async () => {
+  const fetchColorPalettes = useCallback(async () => {
     const data = await fetch(
       'https://color-palette-api.kadikraman.vercel.app/palettes',
     );
@@ -16,8 +17,16 @@ export default function Home({ navigation }) {
   }, []);
 
   useEffect(() => {
-    getPalettes();
-  }, [getPalettes]);
+    fetchColorPalettes();
+  }, [fetchColorPalettes]);
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await fetchColorPalettes();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, [fetchColorPalettes]);
 
   return (
     <View style={styles.container}>
@@ -38,6 +47,8 @@ export default function Home({ navigation }) {
             />
           );
         }}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
       />
     </View>
   );
