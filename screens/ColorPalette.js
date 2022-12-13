@@ -8,33 +8,21 @@ const COLORS = [
   { colorName: 'Base00', hexCode: '#657b83' },
   { colorName: 'Base0', hexCode: '#839496' },
   { colorName: 'Base1', hexCode: '#93a1a1' },
-  { colorName: 'Base2', hexCode: '#eee8d5' },
-  { colorName: 'Base3', hexCode: '#fdf6e3' },
-  { colorName: 'Yellow', hexCode: '#b58900' },
-  { colorName: 'Orange', hexCode: '#cb4b16' },
-  { colorName: 'Red', hexCode: '#dc322f' },
-  { colorName: 'Magenta', hexCode: '#d33682' },
-  { colorName: 'Violet', hexCode: '#6c71c4' },
-  { colorName: 'Blue', hexCode: '#268bd2' },
-  { colorName: 'Cyan', hexCode: '#2aa198' },
-  { colorName: 'Green', hexCode: '#859900' },
 ];
 
-export default function ColorPalette() {
+export default function ColorPalette({ route }) {
+  const DATA = route.params?.colors;
   return (
-    <SafeAreaView>
-      <View>
-        <FlatList
-          data={COLORS}
-          style={styles.container}
-          keyExtractor={(item, index) => index}
-          renderItem={({ item }) => (
-            <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
-          )}
-          ListHeaderComponent={<Text style={styles.header}>Transaction</Text>}
-        />
-      </View>
-    </SafeAreaView>
+    <View style={{ backgroundColor: 'white', height: '100%' }}>
+      <FlatList
+        data={DATA}
+        style={styles.container}
+        keyExtractor={(item, index) => index}
+        renderItem={({ item }) => (
+          <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
+        )}
+      />
+    </View>
   );
 }
 
@@ -42,5 +30,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     marginBottom: 20,
+    backgroundColor: 'white',
   },
 });
