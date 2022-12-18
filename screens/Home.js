@@ -1,4 +1,10 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { useEffect, useState, useCallback } from 'react';
 import SectionPalette from '../components/SectionPalette';
 
@@ -50,6 +56,10 @@ export default function Home({ navigation }) {
         refreshing={isRefreshing}
         onRefresh={handleRefresh}
       />
+
+      <TouchableOpacity onPress={() => navigation.navigate('Forms')}>
+        <Text>Go to Forms</Text>
+      </TouchableOpacity>
     </View>
   );
 }

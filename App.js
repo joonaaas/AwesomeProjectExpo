@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import Home from './screens/Home';
 import ColorPalette from './screens/ColorPalette';
+import Forms from './screens/Forms';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,6 +17,13 @@ export default function App() {
           component={ColorPalette}
           options={({ route }) => ({
             title: route.params?.paletteName || 'Color Palette',
+          })}
+        />
+        <Stack.Screen
+          name="Forms"
+          component={Forms}
+          options={({ route }) => ({
+            title: 'Forms',
           })}
         />
       </Stack.Navigator>
