@@ -6,44 +6,47 @@ import ModalScreen from './screens/MyModal';
 import HeaderGoBackBtn from './components/HeaderGoBackBtn';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { PaletteProvider } from './context/palettes-context';
 
 const RootStack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Group>
-          <RootStack.Screen name="Home" component={Home} />
-          <RootStack.Screen
-            name="ColorPalette"
-            component={ColorPalette}
-            options={({ route }) => ({
-              title: route.params?.paletteName || 'Color Palette',
-            })}
-          />
-          <RootStack.Screen
-            name="Forms"
-            component={Forms}
-            options={({ route }) => ({
-              title: 'Forms',
-            })}
-          />
-        </RootStack.Group>
+    <PaletteProvider>
+      <NavigationContainer>
+        <RootStack.Navigator>
+          <RootStack.Group>
+            <RootStack.Screen name="Home" component={Home} />
+            <RootStack.Screen
+              name="ColorPalette"
+              component={ColorPalette}
+              options={({ route }) => ({
+                title: route.params?.paletteName || 'Color Palette',
+              })}
+            />
+            <RootStack.Screen
+              name="Forms"
+              component={Forms}
+              options={({ route }) => ({
+                title: 'Forms',
+              })}
+            />
+          </RootStack.Group>
 
-        <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen
-            name="MyModal"
-            component={ModalScreen}
-            options={{
-              headerLeft: () => {
-                return <HeaderGoBackBtn />;
-              },
-            }}
-          />
-        </RootStack.Group>
-      </RootStack.Navigator>
-    </NavigationContainer>
+          <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+            <RootStack.Screen
+              name="MyModal"
+              component={ModalScreen}
+              options={{
+                headerLeft: () => {
+                  return <HeaderGoBackBtn />;
+                },
+              }}
+            />
+          </RootStack.Group>
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </PaletteProvider>
   );
 }
 

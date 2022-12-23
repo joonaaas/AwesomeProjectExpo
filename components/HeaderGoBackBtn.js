@@ -6,7 +6,7 @@ export default function HeaderGoBackBtn() {
 
   return (
     <TouchableOpacity onPress={() => navigation.goBack()}>
-      <Text>Go to Modal</Text>
+      <Text>Go Back</Text>
     </TouchableOpacity>
   );
 }

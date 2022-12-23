@@ -5,11 +5,12 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 import SectionPalette from '../components/SectionPalette';
+import { usePalette } from '../context/palettes-context';
 
 export default function Home({ navigation }) {
-  const [palettes, setPalettes] = useState([]);
+  const [palettes, setPalettes] = usePalette([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchColorPalettes = useCallback(async () => {
@@ -20,7 +21,7 @@ export default function Home({ navigation }) {
       const json = await data.json();
       setPalettes(json);
     }
-  }, []);
+  }, [setPalettes]);
 
   useEffect(() => {
     fetchColorPalettes();
@@ -36,6 +37,10 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate('MyModal')}>
+        <Text style={styles.heading}>Go to Modal</Text>
+      </TouchableOpacity>
+
       <FlatList
         data={palettes}
         keyExtractor={(item) => item.id}
@@ -56,17 +61,6 @@ export default function Home({ navigation }) {
         refreshing={isRefreshing}
         onRefresh={handleRefresh}
       />
-
-      <TouchableOpacity
-        style={{ marginBottom: 8 }}
-        onPress={() => navigation.navigate('Forms')}
-      >
-        <Text>Go to Forms</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate('MyModal')}>
-        <Text>Go to Modal</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -75,5 +69,11 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     marginBottom: 20,
+  },
+  heading: {
+    fontWeight: '600',
+    fontSize: 28,
+    marginBottom: 10,
+    color: 'blue',
   },
 });
