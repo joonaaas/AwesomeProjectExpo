@@ -59,7 +59,7 @@ export default function Forms() {
         onValueChange={(itemValue) => setValue5(itemValue)}
       >
         {FOODS.map((food, index) => (
-          <Picker.Item key="index" label={food} value={food} />
+          <Picker.Item key={index} label={food} value={food} />
         ))}
       </Picker>
     </View>

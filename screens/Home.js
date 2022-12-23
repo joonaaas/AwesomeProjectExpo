@@ -57,8 +57,15 @@ export default function Home({ navigation }) {
         onRefresh={handleRefresh}
       />
 
-      <TouchableOpacity onPress={() => navigation.navigate('Forms')}>
+      <TouchableOpacity
+        style={{ marginBottom: 8 }}
+        onPress={() => navigation.navigate('Forms')}
+      >
         <Text>Go to Forms</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('MyModal')}>
+        <Text>Go to Modal</Text>
       </TouchableOpacity>
     </View>
   );
