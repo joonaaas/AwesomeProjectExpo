@@ -11,6 +11,6 @@ export function PaletteProvider(props) {
 
 export function usePalette() {
   const context = useContext(PaletteContext);
-  console.log(context);
+
   return context;
 }

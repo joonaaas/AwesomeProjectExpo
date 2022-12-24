@@ -10,7 +10,6 @@ export default function ColorSchemeSwitch({
   const [active, setActive] = useState(false);
 
   function handleSwitch(value) {
-    console.log({ value });
     if (value) {
       setActive(true);
       handleActiveColors(true, { colorName, hexCode });
